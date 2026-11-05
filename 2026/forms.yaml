@@ -1,0 +1,204 @@
+- id: match
+  name: Match Scouting
+  pages:
+    - title: Pre-Match
+      questions:
+          - id: match_type
+            question: Match type?
+            type: select-one
+            options:
+                - Practice
+                - Quals
+                - Playoff
+            required: true
+          - id: match_number
+            question: Match number?
+            type: number
+            required: true
+          - id: team_id
+            question: Team number?
+            type: team-input
+            required: true
+    - title: Autonomous
+      questions:
+          - id: start-location
+            question:
+                Where on the field do they start? (the red human player side is the
+                RIGHT side)
+            type: select-one
+            options:
+                - Left
+                - Center
+                - Right
+            required: true
+          - id: start-component
+            question: What field component do they start near?
+            type: select-one
+            options:
+                - Bump
+                - Trench
+                - Hub
+            required: true
+          - id: did-they-auto
+            question: Did they do auto?
+            type: yes-no
+            required: true
+          - id: auto-procedure
+            question: What did they do during auto?
+            type: text-large
+            parent: did-they-auto
+            required: true
+    - title: Tele-op (Intake)
+      questions:
+          - id: collection-locations
+            question: Where do they collect from?
+            type: select-multi
+            options:
+                - Neutral Zone
+                - Alliance's zone
+                - Against a wall
+                - Human Player
+                - Corral
+                - Depot
+            required: true
+          - id: hopper-capacity
+            question: When they collect, about how full was their hopper?
+            type: select-one
+            options:
+                - 0%
+                - 25%
+                - 50%
+                - 75%
+                - 100%
+            required: true
+- id: pit
+  name: Pit Scouting
+  pages:
+    - title: Scouting Info
+      questions:
+          - id: scout_ids
+            question: What is/are your name(s)?
+            type: scout-input
+            required: true
+          - id: team_id
+            question: Team number?
+            type: team-input
+            required: true
+    - title: Robot Specifics
+      questions:
+          - id: dimensions
+            question: What are the dimensions of the robot?
+            type: text-small
+            required: true
+          - id: bump-or-trench
+            question: "Can they go over the bump, under the trench, or both?"
+            type: select-one
+            options:
+                - Bump
+                - Trench
+                - Both
+            required: true
+          - id: hopper-capacity
+            question: What is the maximum amount of fuel they can hold?
+            type: number
+            required: true
+          - id: camera-positions
+            question: Where are their cameras on the robot?
+            type: text-small
+            required: true
+    - title: Intake
+      questions:
+          - id: hp-intake
+            question: Can they intake from the human player?
+            type: yes-no
+            required: true
+          - id: intake-rate
+            question: How much fuel can they intake per second?
+            type: number
+            required: true
+          - id: intake-mechanism
+            question: What mechanism intakes fuel?
+            type: text-small
+            required: true
+    - title: Outtake
+      questions:
+          - id: has-outtake
+            question: Can they shoot fuel?
+            type: yes-no
+            required: true
+          - id: has-turret
+            question: Do they have a turret?
+            type: yes-no
+            parent: has-outtake
+            required: true
+          - id: turret-degrees
+            question: How far can they rotate their turret (in degrees)?
+            type: number
+            parent: has-turret
+            required: false
+          - id: outtake-mechanism
+            question: What mechanism propels fuel?
+            type: text-small
+            parent: has-outtake
+            required: true
+          - id: outtake-rate
+            question: How much fuel can they shoot per second?
+            type: number
+            parent: has-outtake
+            required: true
+    - title: Autonomous
+      questions:
+          - id: start-local
+            question: Where do they want to start?
+            type: select-one
+            options:
+                - Left
+                - Center
+                - Right
+            required: true
+          - id: can-do-auto
+            question: Do they have auto?
+            type: yes-no
+            required: true
+          - id: autos
+            question: What are the landmarks of the paths they take in auto?
+            type: text-large
+            parent: can-do-auto
+            required: false
+    - title: Automation
+      questions:
+          - id: has-automation
+            question: Does their robot use automation?
+            type: yes-no
+            required: true
+          - id: automation
+            question: How do they use automation?
+            type: text-small
+            parent: has-automation
+            required: false
+          - id: automation-shoot
+            question: Do they use auto targeting for their shooter?
+            type: yes-no
+            parent: has-automation
+            required: false
+    - title: Endgame
+      questions:
+          - id: can-climb
+            question: Can they climb?
+            type: yes-no
+            required: true
+          - id: climb-levels
+            question: What levels can they hang?
+            type: select-multi
+            options:
+                - L1
+                - L2
+                - L3
+            parent: can-climb
+            required: true
+    - title: Additional info
+      questions:
+          - id: additional-info
+            question: Anything else we should know?
+            type: text-large
+            required: false
